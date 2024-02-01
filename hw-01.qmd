@@ -1,6 +1,6 @@
 ---
 title: "HW 01"
-author: "RAJITHA TIRUTHANI"
+author: "RAJITHA REDDY TIRUTHANI"
 format:
   html:
     embed-resources: true
@@ -8,9 +8,7 @@ toc: true
 jupyter: python3
 ---
 
-
 ## Import libraries
-
 
 ```{python}
 #| label: label-me-1
@@ -19,19 +17,15 @@ import statistics
 import pandas as pd
 ```
 
-
 ## 1 - Python basics
 
-
 ### Variables and Types
-
 
 ```{python}
 #| label: Task-1
 #| here i've declared two variables of two different datatypes
 age = 25 #integer variable
 course = "Data Mining" #string variable
-
 
 print(f"Age is: {age}\nCourse is: {course}") #prints values on the console
 print(type(age),type(course)) #prints the type of variable using type() method
@@ -122,7 +116,7 @@ print("Standard Deviation:", std_dev)
 
 
 ```{python}
-#| label: Task 1: NumPy Arrays
+#| label: Task 1 NumPy Arrays
 
 
 #| What is Numpy?
