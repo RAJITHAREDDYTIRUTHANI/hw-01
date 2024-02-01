@@ -1,6 +1,6 @@
 ---
 title: "HW 01"
-author: "INSERT YOUR NAME HERE"
+author: "RAJITHA TIRUTHANI"
 format:
   html:
     embed-resources: true
@@ -8,29 +8,364 @@ toc: true
 jupyter: python3
 ---
 
+
 ## Import libraries
+
 
 ```{python}
 #| label: label-me-1
+import numpy as np
+import statistics
+import pandas as pd
 ```
+
 
 ## 1 - Python basics
 
+
 ### Variables and Types
 
+
 ```{python}
-#| label: label-me-2
+#| label: Task-1
+#| here i've declared two variables of two different datatypes
+age = 25 #integer variable
+course = "Data Mining" #string variable
+
+
+print(f"Age is: {age}\nCourse is: {course}") #prints values on the console
+print(type(age),type(course)) #prints the type of variable using type() method
+```
+#| label: Task-2
+#| here I've used For loop which is a control flow statement that allows us to repeatedly execute a chunk of code for a specific number of iterations
+```{python}
+'''
+def check_prime(num):
+    if number < 2:
+        return False
+    if number == 2:
+        return True
+    if number % 2 == 0:
+        return False
+    for i in range(3, int(number**0.5) + 1, 2):
+        if number % i == 0:
+            return False
+    return True
+    '''
+def check_prime(number):
+    # 'all' keyword checks whether the complete expression returns true or not
+    return number > 1 and all(number % i != 0 for i in range(2, int(number**0.5) + 1))
+```
+#| label: Task-3
+
+
+#| A dictionary is a data structure, that stores a collection of key-value pairs.
+# Features are--
+# Mutable, Key-value pairs(uses unique key for mapping)
+# Let's create a dictionary of student grades
+```{python}student_grades = {
+    'Aman': 'A',
+    'Aanjan': 'B',
+    'Kim': 'C',
+    'Gabby': 'D',
+    'Raj': 'F'
+}
+
+
+# It's a Loop to print each student's name with their resspective grades
+for name, grade in student_grades.items():
+    print(f"Student {name} has grade {grade}")
+```
+#| label: Task-4
+
+
+#  List comprehension is a concise way to create lists in Python. It provides a more readability.
+#  The basic structure of a list comprehension consists of an expression, followed by a for clause, and optionally, one or more if clauses.
+```{python}
+#import statistics
+
+
+# Let's create a list of tuples using list comprehension
+list_comprehen = [(num, num**2) for num in range(1, 11)]
+
+
+# calculate_stats function for finding mean, median, and standard deviation
+def calculate_stats(numbers):
+    mean = statistics.mean(numbers)
+    median = statistics.median(numbers)
+    std_dev = statistics.stdev(numbers)
+    return mean, median, std_dev
+
+
+# calculate the list of squares from list "list_comprehen"
+list_squares = [square for _, square in list_comprehen]
+
+
+# Calculate the stats for the list "list_squares"
+mean, median, std_dev = calculate_stats(list_squares)
+
+
+# Print the list of tuples and calculated stats
+print("List of Tuples:", list_comprehen)
+print("Mean:", mean)
+print("Median:", median)
+print("Standard Deviation:", std_dev)
+
 
 ```
+
 
 ### Control Stuctures
 
+
 ## 2 - NumPy Introduction
 
+
 ```{python}
-#| label: label-me-3
+#| label: Task 1: NumPy Arrays
+
+
+#| What is Numpy?
+# NumPy, is an acronym  for Numerical Python, it provides support for large, multi-dimensional arrays and matrices, and mathematical functions to operate on these arrays.
+
+
+# Let's create a NumPy array A of shape (10, 10) with values ranging from 0 to 99
+
+
+A = np.array([np.arange(10) + i * 10 for i in range(10)])
+
+
+# This calculates the determinant of matrix A
+det_A = np.linalg.det(A)
+
+
+# Print the result
+print("Matrix of A is:")
+print(A)
+print("\nDeterminant of A:", det_A)
+```
+#Task 2: Array Operations
+
+
+#Min-Max Scaling (Normalization):
+#which scales the values of a variable to a specific range, often [0, 1].
+
+
+#Formula:
+
+
+#For each data point
+
+
+#Normalized value = x-min/max-min
+ 
+#Here, Min is the minimum value in the dataset, and Max is the maximum value.
+
+
+```{python}
+# Assuming that we have a 1Dim NumPy array of size 10
+arr = np.array([3, 8, 12, 6, 15, 10, 7, 2, 9, 5])
+
+
+# Normalize the array to the range [0, 1]
+Normalized_array = (arr - np.min(arr)) / (np.max(arr) - np.min(arr))
+
+
+print("Original Array:", arr)
+print("Normalized Array:", Normalized_array)
+```
+# Task -3 Finding Square Root Of Third Column
+
+
+```{python}
+array_2d = np.array([
+    [1, 6, 7],
+    [5, 5, 8],
+    [7, 6, 4]
+])
+
+
+# [row, col]
+third_column = array_2d[:, 2]
+print("Third Column:", third_column)
+
+
+# Iterate through each element of the third column and print their square roots
+print("\nSquare Roots:")
+for element in third_column:
+    square_root = np.sqrt(element)
+    print(square_root)
+
+
+```
+#Task 4: Statistics with NumPy
+
+
+
+
+#In NumPy, the axis parameter is used to specify along which axis the operation should be performed. For 2D arrays, axis=0 refers to operations along columns, and axis=1 refers to operations along rows.
+```{python}
+array_2d = np.array([
+    [1, 6, 7],
+    [5, 5, 8],
+    [7, 6, 4]])
+
+
+#In NumPy, the axis parameter is used to specify along which axis the operation should be performed. For 2D arrays, axis=0 refers to operations along columns, and axis=1 refers to operations along rows.
+
+
+# Calculating for rows(mean, median, and variance) columns
+stats_rows = {'mean': np.mean(array_2d, axis=1),
+              'median': np.median(array_2d, axis=1),
+              'variance': np.var(array_2d, axis=1)}
+
+
+#Calculating for columns(mean, median, and variance)
+stats_columns = {'mean': np.mean(array_2d, axis=0),
+                 'median': np.median(array_2d, axis=0),
+                 'variance': np.var(array_2d, axis=0)}
+
+
+# Identify the row with the maximum variance
+max_variance_row_index = np.argmax(stats_rows['variance'])
+max_variance_row = array_2d[max_variance_row_index]
+
+
+# Let's print the output
+for axis, stats in [('rows', stats_rows), ('columns', stats_columns)]:
+    print(f"\nStatistics along {axis}:")
+    for measure, values in stats.items():
+        print(f"{measure.capitalize()}: {values}")
+
+
+print("\nRow with Maximum Variance (index {}): {}".format(max_variance_row_index, max_variance_row))
+
+
+
 
 ```
 
+
 ## 3 - Pandas Introduction
+#Task 1: Series and DataFrame Basics
+A pandas Series is a one-dimensional labeled array capable of holding any data type.
+
+
+A pandas DataFrame is a two-dimensional labeled data structure with columns that can be different data types.
+
+
+```{python}
+#Task 1: Series and DataFrame Basics
+
+
+import pandas as pd
+import numpy as np
+
+
+# Let's convert the series to data frame using a dictionary
+series_data = pd.Series(dict(zip(list('abcdefghij'), np.random.randint(1, 101, 10))), name='Random_Numbers')
+
+
+#to_frame() to convert the Series into a DataFrame.
+df = series_data.to_frame()
+
+
+# It's time to output the DataFrame
+print(df)
+
+
+
+
+
+
+```
+
+
+Task 2: Data Importing and Inspection
+```{python}
+import pandas as pd
+# Replace 'your_file.csv' with the actual path to your CSV file
+import pandas as pd
+
+
+# Creating DataFrame from the provided data
+data = {'id': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        'name': ['sindhu', 'Ali', 'Bob', 'Charl', 'Eve', 'David', 'Frank', 'Grace', 'Helen', 'Ivy'],
+        'score': [85, 92, 78, 95, 88, 91, 75, 89, 94, 82]}
+
+
+df = pd.DataFrame(data)
+
+
+df.to_csv('pan.csv',index=False)
+
+
+df = pd.read_csv('pan.csv')
+
+
+# Display data types of columns
+print("Data Types:")
+print(df.dtypes)
+
+
+# Display the first 10 rows of the DataFrame
+print("\nFirst 10 Rows:")
+print(df.head(10))
+```
+
+
+Task 3: Data Manipulation and Cleaning
+```{python}
+# Let's Assuming existing_df is our DataFrame
+
+
+# 'fillna' replaces missing values in the 'score' column with the median value.
+import pandas as pd
+
+
+# Replace missing 'score' with the median
+med_sco = df['score'].median()
+df['score'].fillna(med_sco, inplace=True)
+
+
+# Add a new column 'score_normalized'
+mean_score = df['score'].mean()
+std_score = df['score'].std()
+df['score_normalized'] = (df['score'] - mean_score) / std_score
+
+
+# Display the updated DataFrame
+print(df)
+
+
+
+
+```
+
+
+Task 4: Data Aggregation and Grouping
+Aggregation is nothing but grouping the data hierarcally
+```{python}
+import pandas as pd
+
+
+# Group by 'name' and calculate the average score
+avg_scores_df = df.groupby('name')['score'].mean().reset_index()
+
+
+# Rename the 'score' column to 'average_score'
+avg_scores_df.rename(columns={'score': 'average_score'}, inplace=True)
+
+
+# Sort the DataFrame by average scores in descending order
+sorted_avg_scores_df = avg_scores_df.sort_values(by='average_score', ascending=False)
+
+
+# Display the sorted DataFrame
+print(sorted_avg_scores_df)
+
+
+
+
+```
 
